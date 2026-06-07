@@ -1,0 +1,352 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap');
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  overflow: hidden;
+  font-family: 'Rajdhani', sans-serif;
+  background: #000;
+}
+
+/* ── HERO ── */
+.hero {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── BACKGROUND IMAGE ── */
+.bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('./assets/bg.gif'); /* keep your gif here */
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.55) saturate(1.4);
+  animation: drift 30s ease-in-out infinite alternate;
+}
+
+@keyframes drift {
+  from { transform: scale(1) translateX(0); }
+  to   { transform: scale(1.06) translateX(-1%); }
+}
+
+/* ── GRID OVERLAY ── */
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 240, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: grid-scroll 8s linear infinite;
+}
+
+@keyframes grid-scroll {
+  from { background-position: 0 0; }
+  to   { background-position: 60px 60px; }
+}
+
+/* ── COLOR OVERLAY ── */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(0, 180, 255, 0.18) 0%, transparent 70%),
+    linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,20,0.6) 100%);
+}
+
+/* ── SCANLINES ── */
+.scanline {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0,0,0,0.07) 3px,
+    rgba(0,0,0,0.07) 4px
+  );
+  pointer-events: none;
+}
+
+/* ── CORNER BRACKETS ── */
+.corner {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  opacity: 0.5;
+}
+.corner--tl { top: 28px;    left: 28px;  border-top: 2px solid #00f0ff; border-left: 2px solid #00f0ff; }
+.corner--tr { top: 28px;    right: 28px; border-top: 2px solid #00f0ff; border-right: 2px solid #00f0ff; }
+.corner--bl { bottom: 28px; left: 28px;  border-bottom: 2px solid #00f0ff; border-left: 2px solid #00f0ff; }
+.corner--br { bottom: 28px; right: 28px; border-bottom: 2px solid #00f0ff; border-right: 2px solid #00f0ff; }
+
+/* ── CONTENT ── */
+.content {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* ── BADGE ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 22px;
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  border-radius: 3px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #00f0ff;
+  background: rgba(0, 240, 255, 0.06);
+  backdrop-filter: blur(12px);
+  margin-bottom: 28px;
+  animation: pulse-border 3s ease-in-out infinite;
+}
+
+.badge::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #00f0ff;
+  box-shadow: 0 0 8px #00f0ff;
+  animation: blink 1.2s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.2; }
+}
+
+@keyframes pulse-border {
+  0%, 100% { box-shadow: 0 0 0px rgba(0,240,255,0); }
+  50%       { box-shadow: 0 0 18px rgba(0,240,255,0.2); }
+}
+
+/* ── TITLE ── */
+.title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(3.5rem, 10vw, 7.5rem);
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 0.92;
+  color: #fff;
+  text-align: center;
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.title-ai {
+  color: #00f0ff;
+  text-shadow: 0 0 30px rgba(0,240,255,0.5), 0 0 60px rgba(0,240,255,0.2);
+}
+
+.title::after {
+  content: 'FREEXY AI';
+  position: absolute;
+  inset: 0;
+  color: #ff003c;
+  clip-path: inset(100% 0 100% 0);
+  animation: glitch 6s infinite;
+  opacity: 0.6;
+  font-family: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  text-align: center;
+}
+
+@keyframes glitch {
+  0%, 88%, 100% { clip-path: inset(100% 0 100% 0); transform: translate(0); }
+  90%            { clip-path: inset(15% 0 70% 0);   transform: translate(-4px, 0); }
+  92%            { clip-path: inset(60% 0 15% 0);   transform: translate(4px, 0); }
+  94%            { clip-path: inset(40% 0 45% 0);   transform: translate(-2px, 0); }
+}
+
+/* ── SUBTITLE ── */
+.subtitle {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-weight: 300;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: rgba(180, 220, 255, 0.7);
+  margin-bottom: 48px;
+  text-align: center;
+}
+
+/* ── CARD ── */
+.waitlist-card {
+  width: min(840px, 92vw);
+  padding: clamp(28px, 5vw, 50px) clamp(24px, 5vw, 50px);
+  border-radius: 6px;
+  background: rgba(2, 8, 24, 0.55);
+  backdrop-filter: blur(24px) saturate(1.5);
+  border: 1px solid rgba(0, 240, 255, 0.18);
+  box-shadow:
+    0 0 0 1px rgba(0,240,255,0.04) inset,
+    0 40px 100px rgba(0, 0, 0, 0.6),
+    0 0 60px rgba(0, 180, 255, 0.07);
+  position: relative;
+  overflow: hidden;
+}
+
+.waitlist-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 10%; right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #00f0ff, transparent);
+  opacity: 0.6;
+}
+
+.card-label {
+  font-size: 0.65rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(0, 240, 255, 0.5);
+  margin-bottom: 10px;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 400;
+}
+
+.waitlist-card h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.waitlist-card p {
+  color: rgba(180, 210, 240, 0.6);
+  font-size: 1rem;
+  font-weight: 300;
+  letter-spacing: 1px;
+  margin-bottom: 30px;
+}
+
+/* ── EMAIL BOX ── */
+.email-box {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.email-input {
+  flex: 1;
+  height: 56px;
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  border-radius: 4px;
+  padding: 0 22px;
+  background: rgba(0, 240, 255, 0.04);
+  color: #e0f4ff;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.email-input::placeholder {
+  color: rgba(100, 180, 220, 0.4);
+  letter-spacing: 2px;
+  font-size: 0.9rem;
+}
+
+.email-input:focus {
+  border-color: rgba(0, 240, 255, 0.5);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.1), inset 0 0 12px rgba(0,240,255,0.03);
+}
+
+.join-btn {
+  height: 56px;
+  padding: 0 36px;
+  border: none;
+  border-radius: 4px;
+  background: linear-gradient(135deg, #00c8ff 0%, #0066ff 100%);
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s;
+  white-space: nowrap;
+}
+
+.join-btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.4s;
+}
+
+.join-btn:hover::before { left: 100%; }
+
+.join-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(0, 160, 255, 0.6), 0 8px 24px rgba(0, 80, 200, 0.4);
+}
+
+/* ── STATS ── */
+.stats {
+  display: flex;
+  gap: 32px;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(0, 240, 255, 0.08);
+}
+
+.stat { display: flex; flex-direction: column; gap: 2px; }
+
+.stat-num {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #00f0ff;
+  letter-spacing: 1px;
+}
+
+.stat-label {
+  font-size: 0.72rem;
+  color: rgba(150, 200, 240, 0.45);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .email-box { flex-direction: column; }
+  .join-btn { height: 52px; }
+  .stats { gap: 20px; flex-wrap: wrap; }
+  .title::after { display: none; }
+}
