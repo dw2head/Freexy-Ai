@@ -41,18 +41,18 @@ app.get("/", (req, res) => {
 // Port
 const PORT = process.env.PORT || 5000;
 
-// Start Server
 async function startServer() {
   try {
     await connectDB();
-
-    app.listen(PORT, () => {
-      console.log(`✅ Server Running On Port ${PORT}`);
-    });
+    console.log("✅ MongoDB Connected");
   } catch (error) {
     console.error("❌ MongoDB Connection Failed:", error);
-    process.exit(1);
+    console.log("⚠️ Server will still start without DB");
   }
+
+  app.listen(PORT, () => {
+    console.log(`✅ Server Running On Port ${PORT}`);
+  });
 }
 
 startServer();
